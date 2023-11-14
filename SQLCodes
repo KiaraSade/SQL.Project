@@ -1,0 +1,57 @@
+Which is the best selling album?
+SELECT 
+  Album.Title, 
+  SUM(InvoiceLine.UnitPrice) AS total_sales
+FROM 
+  Album 
+  JOIN Track ON Album.AlbumId = Track.AlbumId 
+  JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId 
+GROUP BY 
+  1 
+ORDER BY 
+  2 DESC 
+LIMIT 
+  3;
+What is the name of the client who spent the most?
+SELECT 
+  Customer.FirstName || Customer.LastName AS customer_name, 
+  SUM(Invoice.Total) AS total_spend
+FROM 
+  Customer 
+  JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId 
+GROUP BY 
+  1
+ORDER BY 
+  2 DESC 
+LIMIT 
+  3;
+which is the most popular track?
+SELECT 
+  Track.Name, 
+  SUM(InvoiceLine.UnitPrice) AS total_sales
+FROM 
+  Track 
+  JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId 
+GROUP BY 
+  1 
+ORDER BY 
+  2 DESC 
+LIMIT 
+  3;
+
+
+Who is the best selling artist?
+SELECT 
+  Artist.Name, 
+ ROUND( SUM(InvoiceLine.UnitPrice), 2) AS total_sales
+FROM 
+  Artist 
+  JOIN Album ON Artist.ArtistId = Album.ArtistId 
+  JOIN Track ON Album.AlbumId = Track.AlbumId 
+  JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId 
+GROUP BY 
+  1 
+ORDER BY 
+  2 DESC 
+LIMIT 
+  3;
